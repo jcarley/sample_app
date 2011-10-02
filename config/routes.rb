@@ -1,5 +1,7 @@
 SampleApp::Application.routes.draw do
 
+  get "demo/index"
+
   root :to => "pages#home"
   
   match '/contact', :to => "pages#contact"
