@@ -75,5 +75,5 @@ describe PagesController do
       response.body.should_not match(/<body>\s*<\/body>/)
     end
   end
-
+  
 end
