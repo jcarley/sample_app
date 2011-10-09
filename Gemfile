@@ -14,4 +14,5 @@ group :test do
   gem 'rspec', '2.5.0'
   gem 'webrat'
   gem 'web-app-theme', '>= 0.6.2'
+  gem 'factory_girl_rails', '1.0.1'
 end
