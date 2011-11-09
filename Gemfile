@@ -5,6 +5,7 @@ gem 'sqlite3'
 gem 'gravatar_image_tag', '~> 1.0.0'
 
 group :development do
+  gem 'grb', '~> 0.4.1'
   gem 'rspec-rails', '2.5.0'
   gem 'webrat'
   gem 'web-app-theme', '>= 0.6.2'
