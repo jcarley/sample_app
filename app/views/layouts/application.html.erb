@@ -10,13 +10,11 @@
 
 	<%= render 'layouts/header' %>
 	
-    <div id="wrapper" class="wat-cf">
+    <div id="wapper" class="wat-cf">
 	
       <div class="flash">
         <% flash.each do |type, message| -%>
-          <div class="message <%= type %>">
-            <p><%= message %></p>
-          </div>
+          <%= content_tag(:div, message, :class => "message #{type}") %>
         <% end -%>
       </div>
 

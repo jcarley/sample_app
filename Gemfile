@@ -9,6 +9,8 @@ group :development do
   gem 'webrat'
   gem 'web-app-theme', '>= 0.6.2'
   gem 'annotate', "~> 2.4.0"
+  gem 'ruby-debug', :platforms => [:ruby_18]
+  gem 'ruby-debug19', :platforms => [:ruby_19], :require => 'ruby-debug'
 end
 
 group :test do
