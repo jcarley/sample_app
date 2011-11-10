@@ -5,6 +5,8 @@ gem 'sqlite3'
 gem 'gravatar_image_tag', '~> 1.0.0'
 
 group :development do
+  gem 'colorful', '0.0.2'
+  gem 'fuubar'
   gem 'grb', '~> 0.4.1'
   gem "mongrel", "~> 1.2.0.pre2"
   gem 'rspec-rails', '2.5.0'
