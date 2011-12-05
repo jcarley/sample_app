@@ -56,7 +56,7 @@ describe UsersController do
                                            :content => "delete")
       end
 
-      it "should have a delete links for admins" do
+      it "should not have a delete links for admins" do
         other_user = User.all.second
         get :index
         response.should_not have_selector('a', :href => user_path(other_user),
@@ -195,7 +195,7 @@ describe UsersController do
 
   end
 
-  describe "Get 'edit'"do
+  describe "Get 'edit'" do
 
     before(:each) do
       @user = Factory(:user)
