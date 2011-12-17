@@ -35,7 +35,7 @@ describe PagesController do
         other_user.follow!(@user)
       end
 
-      it "should have the right follower/follwing counts" do
+      it "should have the right follower/following counts" do
         get :home
         response.should have_selector('a', :href => following_user_path(@user),
                                            :content => "0 following")
@@ -43,6 +43,22 @@ describe PagesController do
                                            :content => "1 follower")
       end
 
+      describe "has multiple followers/following users" do
+
+        before(:each) do
+          second_user = Factory(:user, :email => Factory.next(:email))
+          second_user.follow!(@user)
+          @user.follow!(second_user)
+        end
+
+        it "should have the right follower/following counts" do
+          get :home
+          response.should have_selector('a', :href => following_user_path(@user),
+                                             :content => "1 following")
+          response.should have_selector('a', :href => followers_user_path(@user),
+                                             :content => "2 followers")
+        end
+      end
     end
 
   end
