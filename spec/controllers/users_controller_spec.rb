@@ -123,6 +123,25 @@ describe UsersController do
       response.should have_selector('td.sidebar', :content => @user.microposts.count.to_s) 
     end
 
+    describe "signed in user viewing followed uesr" do
+
+      before(:each) do
+        test_sign_in @user
+        @other_user = Factory(:user, :email => Factory.next(:email))
+        @user.follow!(@other_user)
+      end
+
+      it "should not allow for deleting followed user's posts" do
+        mp1 = Factory(:micropost, :user => @other_user, :content => "Foo Bar")
+        mp2 = Factory(:micropost, :user => @other_user, :content => "Baz quux")
+        get :show, :id => @other_user
+        response.should_not have_selector('a', :href => micropost_path(mp1),
+                                               :content => "delete")
+        response.should_not have_selector('a', :href => micropost_path(mp2),
+                                               :content => "delete")
+      end
+    end
+
   end
   
   describe "GET 'new'" do
