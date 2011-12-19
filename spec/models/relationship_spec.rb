@@ -44,6 +44,24 @@ describe Relationship do
       @follower.relationships.build.should_not be_valid
     end
   end
+
+  describe "relationship associations" do
+
+    before(:each) do
+      @relationship = @follower.relationships.create!(@attr)
+    end
+
+    it "should destroy relationships" do
+      @follower.destroy
+      Relationship.find_by_id(@relationship.id).should be_nil
+    end
+
+    it "should destroy reverse relationships" do
+      @followed.destroy
+      Relationship.find_by_id(@relationship.id).should be_nil
+    end
+  end
+
 end
 
 # == Schema Information
