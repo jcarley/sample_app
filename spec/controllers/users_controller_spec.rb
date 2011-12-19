@@ -123,6 +123,22 @@ describe UsersController do
       response.should have_selector('td.sidebar', :content => @user.microposts.count.to_s) 
     end
 
+    describe "when signed in" do
+
+      before(:each) do
+        other_user = Factory(:user, :email => Factory.next(:email))
+        other_user.follow!(@user)
+      end
+
+      it "should have the right follower/following counts" do
+        get :show, :id => @user
+        response.should have_selector("a", :href => following_user_path(@user),
+                                           :content => "0 following")
+        response.should have_selector("a", :href => followers_user_path(@user),
+                                           :content => "1 follower")
+      end
+    end
+
     describe "signed in user viewing followed uesr" do
 
       before(:each) do
