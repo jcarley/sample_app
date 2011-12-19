@@ -61,4 +61,32 @@ describe "Users" do
     end
   end
 
+  describe "following/un-following a user" do
+
+    before(:each) do
+      @user = Factory(:user)
+      @other_user = Factory(:user, :email => Factory.next(:email))
+    end
+
+    it "should create a new relationship when following" do
+      lambda do
+        integration_sign_in @user
+        controller.should be_signed_in
+        visit user_path(@other_user)
+        click_button
+      end.should change(Relationship, :count).by(1)
+    end
+
+    it "should remove the relationship when un-following" do
+      @user.follow!(@other_user)
+      lambda do
+        integration_sign_in @user
+        controller.should be_signed_in
+        visit user_path(@other_user)
+        click_button
+      end.should change(Relationship, :count)
+    end
+
+  end
+
 end
